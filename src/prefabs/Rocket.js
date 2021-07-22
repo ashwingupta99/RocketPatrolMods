@@ -1,4 +1,4 @@
- @type {import("../../typings/phaser")}
+ /**@type {import("../../typings/phaser")}**/
 //Rocket Prefab
 
 class Rocket extends Phaser.GameObjects.Sprite{
