@@ -35,7 +35,11 @@ class Play extends Phaser.Scene{
         this.add.rectangle(603, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(37, 42, 566, 64, 0x00FF00).setOrigin(0, 0);
 
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocket = new Rocket(this, game.config.width/2431, 'rocket').setScale(.5).setOrigin(0);
+        this.flip=[];
+        for (let index = 0; index < 3; index++){
+            this.flip.push(Phaser.Math.Between(0,1));
+        }
 
         //add spaceshipsx3
         // if corresponding flip variable is true set the sprite to come from the opposite direction and flip the sprite
