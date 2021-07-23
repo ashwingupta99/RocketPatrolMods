@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene{
             fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '##800080',
+            color: '#800080',
             align: 'left',
             padding: {
                 top: 5,
@@ -45,7 +45,7 @@ class Menu extends Phaser.Scene{
             fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '##800080',
+            color: '#800080',
             align: 'right',
             padding: {
                 top: 5,
