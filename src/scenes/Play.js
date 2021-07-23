@@ -12,6 +12,7 @@ class Play extends Phaser.Scene{
     }
 
     preload(){
+        //load images and tilesprites
 
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
@@ -33,9 +34,11 @@ class Play extends Phaser.Scene{
         this.add.rectangle(5, 443, 630, 32, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(5, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(603, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
+
         this.add.rectangle(37, 42, 566, 64, 0x00FF00).setOrigin(0, 0);
 
-        this.p1Rocket = new Rocket(this, game.config.width/2431, 'rocket').setScale(.5).setOrigin(0);
+        //add rocket (p1)
+        this.p1Rocket = new Rocket(this, game.config.width/2,431, 'rocket').setScale(.5).setOrigin(0);
         this.flip=[];
         for (let index = 0; index < 3; index++){
             this.flip.push(Phaser.Math.Between(0,1));
@@ -78,12 +81,12 @@ class Play extends Phaser.Scene{
 
         this.anims.create({
             key: 'explode',
-            frames:this.anims.generateFrameNumbers('explosion', {start:0, end:9, first:0}),
-            frameRate:30
+            frames: this.anims.generateFrameNumbers('explosion', {start:0, end:9, first:0}),
+            frameRate: 30
         });
 
         //score
-        this.p1Score=0;
+        this.p1Score = 0;
 
         //highscore variable
         if(this.highscore==0 || typeof(this.highscore)!="number"){
@@ -92,7 +95,7 @@ class Play extends Phaser.Scene{
 
 
         let scoreConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '#F3B141',
             color: '#843605',
@@ -106,9 +109,9 @@ class Play extends Phaser.Scene{
 
         let highScoreConfig = {
             fontFamily: 'Arial',
-            fontSize: '32px',
+            fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '#800080',
+            color: '#843605',
             align: 'right',
             padding: {
                 top: 5,
@@ -120,7 +123,7 @@ class Play extends Phaser.Scene{
             fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '#800080',
+            color: '#843605',
             align: 'center',
             padding: {
                 top: 5,
@@ -133,7 +136,7 @@ class Play extends Phaser.Scene{
             fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '#800080',
+            color: '#843605',
             align: 'center',
             padding: {
                 top: 5,
@@ -174,13 +177,13 @@ class Play extends Phaser.Scene{
         }, null, this);
 
         let musicConfig={
-            mute:false,
-            rate:1,
-            volume:1,
-            seek:0,
-            detune:0,
-            loop:true,
-            delay:0
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
         }
 
         this.music= this.sound.add('track',musicConfig);
@@ -189,6 +192,9 @@ class Play extends Phaser.Scene{
     }
 
     update(){
+
+
+
         this.countdown=(game.settings.gameTimer-this.clock.getElapsed())/1000;
         //check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)){
@@ -223,19 +229,26 @@ class Play extends Phaser.Scene{
 
         if(this.checkCollision(this.p1Rocket,this.spaceShip01)){
             this.p1Rocket.reset();
+
+            //make fire text invisible
             this.fire.setAlpha(0);
             this.shipExplode(this.spaceShip01);
         }
         if(this.checkCollision(this.p1Rocket,this.spaceShip02)){
             this.p1Rocket.reset();
+
+            //make fire text invisible
             this.fire.setAlpha(0);
             this.shipExplode(this.spaceShip02);
         }
         if(this.checkCollision(this.p1Rocket,this.spaceShip03)){
             this.p1Rocket.reset();
+
+            //make fire text invisible
             this.fire.setAlpha(0);
             this.shipExplode(this.spaceShip03);
         }
+
         if(this.p1Score>this.highscore){
             this.highscore=this.p1Score;
             this.highDisp.text="HS:" + this.highscore;
@@ -246,6 +259,7 @@ class Play extends Phaser.Scene{
     }
 
     checkCollision(rocket,ship){
+        //simple AABB checking
         if(rocket.x< ship.x + ship. width &&
            rocket.x + rocket.width > ship.x &&
            rocket.y < ship.y + ship.height &&
@@ -291,3 +305,4 @@ class Play extends Phaser.Scene{
 
     }
 }
+
