@@ -15,7 +15,7 @@ Ashwin Gupta, Rocket Patrol Modded,
 **/
 
  let config={
-    type:Phaser.CANVAS,
+    type:Phaser.AUTO,
     width:640,
     height:480,
     scene:[Menu,Play],
